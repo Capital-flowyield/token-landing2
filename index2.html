@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Protocol</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+/* BACKGROUND PREMIUM */
+body {
+  background: radial-gradient(circle at 20% 10%, #140022, #000000 60%);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* GLOW TEXT (più elegante) */
+.glow {
+  text-shadow: 0 0 6px rgba(168, 85, 247, 0.7),
+               0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+/* GLASS EFFECT (più premium) */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(168,85,247,0.2);
+  box-shadow: 0 0 30px rgba(168,85,247,0.05);
+  border-radius: 16px;
+}
+
+/* DIVIDER LINE (più pulita) */
+.line {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(168,85,247,0.3),
+    transparent
+  );
+  margin: 60px auto;
+  width: 85%;
+}
+
+/* FADE ANIMATION (più smooth) */
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SVG LINE ANIMATION (premium) */
+.line1 {
+  animation: move1 12s ease-in-out infinite alternate;
+}
+
+.line2 {
+  animation: move2 14s ease-in-out infinite alternate;
+}
+
+.line3 {
+  animation: move3 16s ease-in-out infinite alternate;
+}
+
+@keyframes move1 {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(20px); }
+}
+
+@keyframes move2 {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-15px); }
+}
+
+@keyframes move3 {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(10px); }
+}
+
+/* BUTTON HOVER (effetto premium) */
+button, a {
+  transition: all 0.3s ease;
+}
+
+button:hover, a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(168,85,247,0.2);
+}
+
+</style>
+</head>
+
+<body class="text-white">
+
+<!-- NAVBAR -->
+<header class="flex justify-between items-center px-6 md:px-10 py-6">
+  <div class="flex items-center gap-3">
+
+  <img src="./PHOTO/LOGO-SENZA-SFONDO.png" alt="LOGO-SENZA-SFONDO" class="w-10 h-10">
+
+  <h1 class="text-2xl font-bold tracking-wide text-purple-300">
+  CAPITAL
+</h1>
+
+</div>
+
+  <nav class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-10 text-gray-300">
+    <a href="#home">HOME</a>
+    <a href="#contest">CONTEST</a>
+    <a href="#mission">MISSION</a>
+    <a href="#problem">PROBLEM</a>
+    <a href="#rewards">REWARDS</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-12 fade">
+
+<h1 class="text-3xl md:text-4xl font-bold glow mb-4 max-w-2xl">
+PERFORMANCE-BASED REWARD SYSTEM BUILT FOR RETAIL TRADERS
+</h1>
+
+<div class="w-24 h-[2px] bg-purple-500 mb-6"></div>
+
+<p class="text-sm md:text-base text-gray-300 max-w-md md:max-w-lg mb-8">
+Earn more from your trading activity — even when the market isn’t in your favor.
+</p>
+
+<div class="glass p-6 rounded-xl w-full max-w-md mx-auto">
+
+<form id="signup-form" class="w-full max-w-md mx-auto">
+
+  <input 
+    type="text" 
+    id="username"
+    placeholder="Username" 
+    class="w-full p-3 mb-3 rounded text-black"
+  >
+
+  <input 
+    type="email" 
+    id="email"
+    placeholder="Email" 
+    class="w-full p-3 mb-3 rounded text-black"
+    required
+  >
+
+  <button 
+    type="submit"
+    class="w-full bg-purple-600 hover:bg-purple-500 p-3 rounded font-bold">
+    ACCESS WHITELIST
+  </button>
+
+</form>
+
+<script>
+document.getElementById("signup-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const username = document.getElementById("username").value;
+
+  try {
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        username
+      })
+    });
+
+    if (res.ok) {
+      window.location.href = "/thank-you.html";
+    } else {
+      alert("Errore, riprova");
+    }
+
+  } catch (error) {
+    alert("Errore server");
+    console.error(error);
+  }
+});
+</script>
+
+</div>
+
+<p class="text-purple-300 mt-6 text-base md:text-lg">
+EARLY ACCESS — 80% REWARD BOOST FOR THE FIRST 30 DAYS
+</p>
+
+<div class="line"></div>
+
+<!-- CONTEST SECTION -->
+<section id="contest" class="py-12 bg-gray-900 text-white px-6">
+
+  <div class="max-w-5xl mx-auto text-center">
+
+    <!-- TITLE -->
+    <h2 class="text-4xl font-bold mb-4">
+      Trading Performance Challenge
+    </h2>
+
+    <p class="text-gray-300 mb-12 text-lg">
+      Only 10 selected traders will be able to participate in this exclusive challenge.
+    </p>
+
+    <!-- PRIZES -->
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+      <div class="bg-black p-6 rounded-xl border border-gray-700">
+        <h3 class="text-2xl font-bold text-yellow-400 mb-2">🥇 1° Posto</h3>
+        <p class="text-xl">$400</p>
+      </div>
+
+      <div class="bg-black p-6 rounded-xl border border-gray-700">
+        <h3 class="text-2xl font-bold text-gray-300 mb-2">🥈 2° Posto</h3>
+        <p class="text-xl">$250</p>
+      </div>
+
+      <div class="bg-black p-6 rounded-xl border border-gray-700">
+        <h3 class="text-2xl font-bold text-orange-400 mb-2">🥉 3° Posto</h3>
+        <p class="text-xl">$100</p>
+      </div>
+
+    </div>
+
+    <!-- RULES -->
+    <div class="text-left max-w-3xl mx-auto bg-black p-8 rounded-xl border border-gray-700 mb-10">
+
+      <h3 class="text-2xl font-bold mb-4 text-center">How to participate</h3>
+
+      <ul class="space-y-3 text-gray-300">
+        <li>✔ Deposit minimum <b>$500</b> on our affiliated broker</li>
+        <li>✔ Reach at least <b>+20% profit</b></li>
+        <li>✔ Trade minimum <b>2 lots</b></li>
+      </ul>
+
+      <div class="mt-6 text-center text-gray-400">
+        No time limits. First traders to complete the conditions win.
+      </div>
+
+    </div>
+
+    <!-- WARNING -->
+    <p class="text-gray-400 mb-10">
+      Only 10 participants allowed. Once spots are filled, registration will close permanently.
+    </p>
+
+    <!-- CTA BUTTON -->
+    <a href="https://t.me/@Capital_Token"
+       class="inline-block bg-purple-500 hover:bg-green-600 text-black font-bold px-8 py-4 rounded-xl text-lg transition">
+      Join Private Telegram Briefing
+    </a>
+
+  </div>
+
+</section>
+
+<div class="line"></div>
+
+<!-- MISSION -->
+<section id="mission" class="px-6 md:px-10 py-16 md:py-24 text-center fade">
+
+  <div class="max-w-3xl mx-auto space-y-6 text-sm md:text-base">
+
+    <h2 class="text-3xl md:text-4xl text-purple-400 font-bold">
+      MISSION
+    </h2>
+
+    <p>
+      Retail trading is one of the most active markets in the world, yet one of the least sustainable.
+    </p>
+
+    <p>
+      Over 87% of traders lose capital and drop out after the initial stages.
+    </p>
+
+    <p>
+      Capital was built to transform trading into a sustainable system based on real performance.
+    </p>
+
+    <p>
+      Every trade generates value. Every volume contributes to the system.
+    </p>
+
+    <p class="text-white font-semibold">
+      The goal is not just to profit, but to make trading sustainable over the long term.
+    </p>
+
+  </div>
+
+</section>
+
+<div class="line"></div>
+
+<!-- PROBLEM -->
+<section id="problem" class="px-6 md:px-10 py-16 md:py-24 fade">
+
+<h2 class="text-2xl md:text-3xl text-purple-400 mb-6 text-center">
+THE PROBLEM WITH TRADING TODAY
+</h2>
+
+<div class="glass p-6 md:p-8 rounded-xl max-w-3xl mx-auto text-left space-y-4 text-sm md:text-base">
+
+<p>• 87% of traders lose capital</p>
+<p>• No system rewards trading activity</p>
+<p>• Traders operate without building long-term value</p>
+<p>• The system is purely speculative</p>
+
+<p class="text-purple-300 mt-6">
+There is no mechanism that monetizes activity itself.
+</p>
+
+</div>
+
+</section>
+
+<div class="line"></div>
+
+<!-- REWARD -->
+<section id="rewards" class="px-6 md:px-10 py-16 md:py-24 fade text-center">
+
+<h2 class="text-2xl md:text-3xl text-purple-400 mb-6">
+REWARD SYSTEM
+</h2>
+
+<div class="max-w-4xl mx-auto text-gray-300 space-y-4 text-left text-sm md:text-base">
+
+<p><b>Capital</b> introduces a fee redistribution system based on real user activity.</p>
+
+<p>The token generates fees through market transactions.</p>
+
+<p>A portion of these fees is distributed to users in staking.</p>
+
+<p>The percentage you receive is not fixed — it increases based on trading volume through the affiliated broker.</p>
+
+<p>The more trades you open, the higher your reward percentage.</p>
+
+</div>
+
+<!-- TABLE -->
+<div class="overflow-x-auto mt-10">
+<table class="glass mx-auto w-full max-w-4xl text-sm md:text-base">
+
+<tr class="text-purple-300">
+<th class="p-3 md:p-4 text-center">Tier</th>
+<th class="p-3 md:p-4 text-center">Lots</th>
+<th class="p-3 md:p-4 text-center">Reward</th>
+</tr>
+
+<tr><td class="p-3 md:p-4 text-center">Base</td><td class="text-center">0</td><td class="text-center">30%</td></tr>
+<tr><td class="p-3 md:p-4 text-center">Bronze</td><td class="text-center">1</td><td class="text-center">35%</td></tr>
+<tr><td class="p-3 md:p-4 text-center">Silver</td><td class="text-center">2</td><td class="text-center">40%</td></tr>
+<tr><td class="p-3 md:p-4 text-center">Gold</td><td class="text-center">3</td><td class="text-center">45%</td></tr>
+<tr><td class="p-3 md:p-4 text-center">Platinum</td><td class="text-center">4</td><td class="text-center">50%</td></tr>
+<tr><td class="p-3 md:p-4 text-center">Diamond</td><td class="text-center">5+</td><td class="text-center">55%</td></tr>
+
+</table>
+</div>
+
+<!-- EXAMPLE -->
+<div class="max-w-4xl mx-auto mt-10 text-gray-300 text-left space-y-4 text-sm md:text-base">
+
+<p><b>Base scenario</b> (assuming users have equal capital):</p>
+<p>If the system generates $1000 in fees and there are 100 users staking:</p>
+<p>1000 × 30% = 300 → 300 / 100 = $3 per user</p>
+
+<p><b>With trading activity (Diamond tier):</b></p>
+<p>If the system generates $1000 in fees and there are 10 Diamond users:</p>
+<p>1000 × 55% = 550 → 550 / 10 = $55 per user</p>
+
+</div>
+
+<p class="mt-10 text-purple-400 text-lg md:text-xl font-bold">
+The system doesn’t reward only winners. It rewards participation.
+</p>
+
+</section>
+
+<!-- SCRIPT -->
+<script>
+const usersEl = document.getElementById("users");
+let users = 127;
+
+setInterval(() => {
+  users += Math.random() * 0.2;
+  usersEl.innerText = Math.floor(users);
+}, 3000);
+
+const fadeEls = document.querySelectorAll(".fade");
+window.addEventListener("scroll", () => {
+  fadeEls.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+      el.classList.add("show");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
